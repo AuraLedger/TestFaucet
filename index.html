@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Aura Test Faucet</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="well well-lg">
+            <h1>Aura Test Faucet</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12" style="text-align: center">
+          Enter the address where you want to recive aura test (art) coins. (Can only be used once per day.)
+          <input type="text" id="address" placeholder="0xA1S2D3F4...."></input>
+          <button onclick="drip()">Submit</button>
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    var faucetApiUrl = 'http://localhost:3005/';
+    //var faucetApiUrl = 'https://testfaucet.auraledger.com/';
+
+    function drip() {
+      $.get(faucetApiUrl + $('#address').val()).done(function (response) {
+          $('#result').text(response.toString());
+        }).fail(function(error) {
+          $('#result').text(error.toString() + (error.message || '') + (error.msg || ''));
+          console.log(error);
+          console.log(error.toString() + (error.message || '') + (error.msg || ''));
+        });
+    }
+  </script>
+  </body>
+</html>
