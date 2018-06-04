@@ -42,8 +42,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <script type="text/javascript">
-    var faucetApiUrl = 'http://localhost:3005';
-    //var faucetApiUrl = 'https://testfaucet.auraledger.com';
+    //var faucetApiUrl = 'http://localhost:3005';
+    var faucetApiUrl = 'https://testfaucet.auraledger.com';
 
     function drip() {
       $.get([faucetApiUrl, 'drip', $('#address').val()].join('/')).done(function (response) {
