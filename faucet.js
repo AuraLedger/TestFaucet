@@ -1,6 +1,6 @@
 const express = require('express');
 const config = require('./config.js');
-const Web3 = require('Web3');
+const Web3 = require('web3');
 const net = require('net');
 
 const app = express();
