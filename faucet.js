@@ -21,6 +21,10 @@ var lastDay = -1;
 var ips = {};
 var adrs = {};
 
+app.route('/').get((req, res) => {
+    res.sendFile('index.html', {root: __dirname});
+});
+
 app.route('/balance').get((req, res) => {
     web3.eth.getBalance(config.address, (err, bal) => {
         if(err) {
