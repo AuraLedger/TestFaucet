@@ -18,16 +18,23 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <div class="well well-lg">
+          <div class="well well-lg" style="text-align: center">
             <h1>Aura Test Faucet</h1>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12" style="text-align: center">
-          Enter the address where you want to recive aura test (art) coins. (Can only be used once per day.)
-          <input type="text" id="address" placeholder="0xA1S2D3F4...."></input>
-          <button onclick="drip()">Submit</button>
+          <p>Enter the address where you want to recive aura test (art) coins. (Can only be used once per day.)</p>
+          <p>Fauce Balance: <span id="bal"></span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3" style="text-align: center">
+          <div class="input-group">
+            <input class="form-control" type="text" id="address" placeholder="0xA1S2D3F4...."></input>
+            <span class="input-group-btn"><button class="btn btn-default" onclick="drip()">Submit</button></span>
+          </div>
           <div id="result"></div>
         </div>
       </div>
@@ -35,11 +42,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <script type="text/javascript">
-    var faucetApiUrl = 'http://localhost:3005/';
-    //var faucetApiUrl = 'https://testfaucet.auraledger.com/';
+    var faucetApiUrl = 'http://localhost:3005';
+    //var faucetApiUrl = 'https://testfaucet.auraledger.com';
 
     function drip() {
-      $.get(faucetApiUrl + $('#address').val()).done(function (response) {
+      $.get([faucetApiUrl, 'drip', $('#address').val()].join('/')).done(function (response) {
           $('#result').text(response.toString());
         }).fail(function(error) {
           $('#result').text(error.toString() + (error.message || '') + (error.msg || ''));
@@ -47,6 +54,14 @@
           console.log(error.toString() + (error.message || '') + (error.msg || ''));
         });
     }
+
+    $.get([faucetApiUrl, 'balance'].join('/')).done(function (response) {
+        $('#bal').text(response.toString());
+    }).fail(function(error) {
+        $('#bal').text(error.toString() + (error.message || '') + (error.msg || ''));
+        console.log(error);
+        console.log(error.toString() + (error.message || '') + (error.msg || ''));
+    });
   </script>
   </body>
 </html>
